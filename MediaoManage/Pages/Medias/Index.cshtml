@@ -1,0 +1,132 @@
+﻿@page
+@model MediaoManage.Pages.Medias.IndexModel
+
+@{
+    ViewData["Title"] = "動画";
+}
+<div class="p-4 vw-100">
+    <div class="row vw-100" >
+        <h1 class="mx-auto d-flex justify-content-center">動画</h1>
+    </div>
+    <div class="d-flex justify-content-around" >
+        <a asp-page="Create" class="text-sm-center bg-info text-white text-decoration-none p-1 h-75 w-auto">新規作成</a>
+        <form  class="w-auto">
+            <p>
+                <input type="text" asp-for="SearchString" placeholder="キーワード..." />
+                <input type="submit" value="フィルター" class="text-decoration-none border p-1 bg-info text-white" />
+            </p>
+        </form>        
+    </div>
+    <div class="row p-1">
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].user_id)
+                    </th>
+                    <th>
+                        キーワード
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_file_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_file_type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_url)
+                    </th>                  
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_thumbnail_url)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_uploaded)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_tags)
+                    </th>                   
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_created)
+                    </th>                   
+                    <th>
+                        動画の状態
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_searchtext)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_modified)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserMedia[0].media_deleted)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UserMedia)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.container_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_file_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_file_type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_url)
+                        </td>                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_thumbnail_url)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_uploaded)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_tags)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_searchtext)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_modified)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.media_deleted)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">編集</a> |
+                            <a asp-page="./Details" asp-route-id="@item.Id">詳細</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">削除</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>  
+</div>
+

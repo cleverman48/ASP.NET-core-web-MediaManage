@@ -1,0 +1,188 @@
+﻿@page
+@model MediaoManage.Pages.Medias.DetailsModel
+
+@{
+    ViewData["Title"] = "詳細";
+}
+<div class="container">  
+    <h1>動画</h1>
+    <h4>詳細</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.user_id)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.user_id)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.container_id)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.container_id)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_file_name)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_file_name)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_file_type)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_file_type)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_url)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_url)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_small_url)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_small_url)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_thumbnail_url)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_thumbnail_url)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_uploaded)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_uploaded)
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_title)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_title)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_description)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_description)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_tags)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_tags)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.Tags)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.Tags)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.ProjectTags)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.ProjectTags)
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_created)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_created)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_originaltags)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_originaltags)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_aitags)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_aitags)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_status)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_status)
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_searchtext)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_searchtext)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_modified)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_modified)
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserMedia.media_deleted)
+        </div>
+        <div class="col-sm-6">
+            @Html.DisplayFor(model => model.UserMedia.media_deleted)
+        </div>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.UserMedia?.Id">編集</a> |
+        <a asp-page="./Index">リスト一覧へ</a>
+    </div>
+</div>
+
