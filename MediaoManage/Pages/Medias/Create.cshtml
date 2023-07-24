@@ -4,18 +4,22 @@
 @{
     ViewData["Title"] = "新規作成";
 }
+<h1> @ViewData["message"]</h1>
 <div class="container">
     <h1 class="text-center">動画新規作成</h1>
     <hr />
     <div class="row d-flex justify-content-center">
         <div class="col-md-4">
-            <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">                    
-                    <label asp-for="file" class="control-label"></label>
-                    <input asp-for="file" class="form-control" />
-                    <span asp-validation-for="file" class="text-danger"></span>
+            <form method="post"  enctype="multipart/form-data" class=" bg-secondary p-2">
+                <div class="form-group">
+                    <input asp-for="file" name="file" class="form-control" />
                 </div>
+                <div class="form-group m-2">
+                    <input type="submit" class="btn btn-primary" value="アップロード" />
+                </div>
+            </form>
+            <form method="post" class="m-2" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="UserMedia.user_id" class="control-label"></label>
                     <input asp-for="UserMedia.user_id" class="form-control" />
@@ -28,17 +32,17 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="UserMedia.media_file_name" class="control-label"></label>
-                    <input asp-for="UserMedia.media_file_name" class="form-control" />
+                    <input asp-for="UserMedia.media_file_name" class="form-control"  />
                     <span asp-validation-for="UserMedia.media_file_name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="UserMedia.media_file_type" class="control-label"></label>
-                    <input asp-for="UserMedia.media_file_type" class="form-control" />
+                    <input asp-for="UserMedia.media_file_type" class="form-control"  />
                     <span asp-validation-for="UserMedia.media_file_type" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="UserMedia.media_url" class="control-label"></label>
-                    <input asp-for="UserMedia.media_url" class="form-control" />
+                    <input asp-for="UserMedia.media_url" class="form-control"  />
                     <span asp-validation-for="UserMedia.media_url" class="text-danger"></span>
                 </div>
                 <div class="form-group">

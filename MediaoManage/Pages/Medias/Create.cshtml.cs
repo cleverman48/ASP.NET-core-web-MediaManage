@@ -10,6 +10,9 @@ using MediaoManage.Models;
 using System.Security.Policy;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Azure.Storage;
+using Azure.Identity;
+using System.Reflection.Metadata;
 
 namespace MediaoManage.Pages.Medias
 {
@@ -17,17 +20,20 @@ namespace MediaoManage.Pages.Medias
     {
         private readonly MediaoManage.Data.MediaoManageContext _context;
         const string blobContainerName = "movie";
-        const string StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=youtubedev;AccountKey=YVHIVv+u2BzVxYPagFotweQNV+9uotA41Oswq+DHX24ALGgPd7ugq2bVu30tRJkLvN3hCvV7PQM3+AStHVNC/Q==;EndpointSuffix=core.windows.net";
+        const string StorageConnectionString = "UseDevelopmentStorage=true";
         private BlobContainerClient blobContainer;
         public CreateModel(MediaoManage.Data.MediaoManageContext context)
         {
             _context = context;
-            BlobServiceClient blobServiceClient = new BlobServiceClient(StorageConnectionString);
-            blobContainer = blobServiceClient.GetBlobContainerClient(blobContainerName);
+            blobContainer = new BlobContainerClient(StorageConnectionString, blobContainerName);
+            blobContainer.CreateIfNotExists();
         }
 
         public IActionResult OnGet()
         {
+            //BlobServiceClient blobServiceClient = new BlobServiceClient(StorageConnectionString);
+           // blobContainer = blobServiceClient.GetBlobContainerClient(blobContainerName);
+           // blobContainer.CreateIfNotExistsAsync(PublicAccessType.Blob);
             return Page();
         }
 
@@ -36,24 +42,39 @@ namespace MediaoManage.Pages.Medias
 
         [BindProperty]
 
-        public IFormFile file { get; set; } = default!;
+        public IFormFile file { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.UserMedia == null || UserMedia == null)
+            if (file != null)
+            {      
+                string media_url = GetRandomBlobName(file.FileName);
+                BlobClient blobClient = blobContainer.GetBlobClient(media_url);
+                using (var stream = file.OpenReadStream())
+                {
+                    await blobClient.UploadAsync(stream);
+                }
+                UserMedia.media_file_name = Path.GetFileNameWithoutExtension(file.FileName);
+                UserMedia.media_file_type = Path.GetExtension(file.FileName);
+                UserMedia.media_url = media_url;
+                _context.UserMedia.Add(UserMedia);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            if (!ModelState.IsValid || _context.UserMedia == null || UserMedia == null)
             {
                 return Page();
-            }
-          if(file!=null)
-            {
-                BlobClient blobClient = blobContainer.GetBlobClient(UserMedia.media_url);
-                await blobClient.UploadAsync(file.OpenReadStream(), true);
             }
             _context.UserMedia.Add(UserMedia);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+        private string GetRandomBlobName(string filename)
+        {
+            string ext = Path.GetExtension(filename);
+            return string.Format("{0:10}_{1}{2}", DateTime.Now.Ticks, Guid.NewGuid(), ext);
         }
     }
 }
