@@ -14,6 +14,6 @@ namespace MediaoManage.Data
         {
         }
 
-        public DbSet<MediaoManage.Models.UserMedia> UserMedia { get; set; } = default!;
+        public DbSet<MediaoManage.Models.UserMedia> UserMedia { get; set; } = default!;        
     }
 }
