@@ -21,6 +21,7 @@ namespace MediaoManage.Pages.Medias
         private readonly MediaoManage.Data.MediaoManageContext _context;
         const string blobContainerName = "movie";
         const string StorageConnectionString = "UseDevelopmentStorage=true";
+        //const string StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=youtubedev;AccountKey=YVHIVv+u2BzVxYPagFotweQNV+9uotA41Oswq+DHX24ALGgPd7ugq2bVu30tRJkLvN3hCvV7PQM3+AStHVNC/Q==;EndpointSuffix=core.windows.net";
         private BlobContainerClient blobContainer;
         public CreateModel(MediaoManage.Data.MediaoManageContext context)
         {
