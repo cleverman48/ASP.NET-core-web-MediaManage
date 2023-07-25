@@ -19,10 +19,10 @@ namespace MediaoManage.Pages.Medias
     public class CreateModel : PageModel
     {
         private readonly MediaoManage.Data.MediaoManageContext _context;
-        const string blobContainerName = "movie";
-        const string StorageConnectionString = "UseDevelopmentStorage=true";
+        public  string blobContainerName = "movie";
+        public  string StorageConnectionString = "UseDevelopmentStorage=true";
         //const string StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=youtubedev;AccountKey=YVHIVv+u2BzVxYPagFotweQNV+9uotA41Oswq+DHX24ALGgPd7ugq2bVu30tRJkLvN3hCvV7PQM3+AStHVNC/Q==;EndpointSuffix=core.windows.net";
-        private BlobContainerClient blobContainer;
+        public  BlobContainerClient blobContainer { get; set; }
         public CreateModel(MediaoManage.Data.MediaoManageContext context)
         {
             _context = context;
@@ -31,10 +31,7 @@ namespace MediaoManage.Pages.Medias
         }
 
         public IActionResult OnGet()
-        {
-            //BlobServiceClient blobServiceClient = new BlobServiceClient(StorageConnectionString);
-           // blobContainer = blobServiceClient.GetBlobContainerClient(blobContainerName);
-           // blobContainer.CreateIfNotExistsAsync(PublicAccessType.Blob);
+        {            
             return Page();
         }
 
@@ -51,7 +48,7 @@ namespace MediaoManage.Pages.Medias
             if (file != null)
             {      
                 string media_url = GetRandomBlobName(file.FileName);
-                BlobClient blobClient = blobContainer.GetBlobClient(media_url);
+                BlobClient blobClient =blobContainer.GetBlobClient(media_url);
                 using (var stream = file.OpenReadStream())
                 {
                     await blobClient.UploadAsync(stream);
