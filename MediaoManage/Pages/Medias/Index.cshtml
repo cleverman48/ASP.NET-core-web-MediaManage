@@ -25,7 +25,7 @@
                         @Html.DisplayNameFor(model => model.UserMedia[0].user_id)
                     </th>
                     <th>
-                        キーワード
+                        コンテナ
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.UserMedia[0].media_file_name)
@@ -56,10 +56,7 @@
                     </th>                   
                     <th>
                         動画の状態
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserMedia[0].media_searchtext)
-                    </th>
+                    </th>                  
                     <th>
                         @Html.DisplayNameFor(model => model.UserMedia[0].media_modified)
                     </th>
@@ -88,8 +85,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.media_url)
                         </td>                        
-                        <td>
-                            @Html.DisplayFor(modelItem => item.media_thumbnail_url)
+                        <td class="d-flex justify-content-center">
+                            @{
+                                Uri uri = Model.blobContainer.GetBlobClient(item.media_thumbnail_url).Uri;
+                            }                
+                            <img src="@uri"  alt="images" width="50" height="50" />
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.media_uploaded)
@@ -108,10 +108,7 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.media_status)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.media_searchtext)
-                        </td>
+                        </td>                     
                         <td>
                             @Html.DisplayFor(modelItem => item.media_modified)
                         </td>

@@ -14,12 +14,15 @@ namespace MediaoManage.Pages.Medias
     public class DeleteModel : PageModel
     {
         private readonly MediaoManage.Data.MediaoManageContext _context;
+        public BlobContainerClient blobContainer { get; set; }
         public string blobContainerName = "movie";
-        //public string StorageConnectionString = "UseDevelopmentStorage=true";
-        const string StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=youtubedev;AccountKey=YVHIVv+u2BzVxYPagFotweQNV+9uotA41Oswq+DHX24ALGgPd7ugq2bVu30tRJkLvN3hCvV7PQM3+AStHVNC/Q==;EndpointSuffix=core.windows.net";
+        public string StorageConnectionString = "UseDevelopmentStorage=true";
+        //const string StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=youtubedev;AccountKey=YVHIVv+u2BzVxYPagFotweQNV+9uotA41Oswq+DHX24ALGgPd7ugq2bVu30tRJkLvN3hCvV7PQM3+AStHVNC/Q==;EndpointSuffix=core.windows.net";
         public DeleteModel(MediaoManage.Data.MediaoManageContext context)
         {
             _context = context;
+            blobContainer = new BlobContainerClient(StorageConnectionString, blobContainerName);
+            blobContainer.CreateIfNotExists();
         }
 
         [BindProperty]
@@ -55,7 +58,7 @@ namespace MediaoManage.Pages.Medias
             }
             var usermedia = await _context.UserMedia.FindAsync(id);
             UserMedia = usermedia;
-            var blobContainer = new BlobContainerClient(StorageConnectionString, blobContainerName);
+            blobContainer = new BlobContainerClient(StorageConnectionString, blobContainerName);
             var blob = blobContainer.GetBlobClient(UserMedia.media_url);
             await blob.DeleteIfExistsAsync();
             if (media_url == "azure")

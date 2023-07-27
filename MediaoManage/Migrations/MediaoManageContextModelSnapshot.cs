@@ -30,22 +30,13 @@ namespace MediaoManage.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ProjectTags")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("container_id")
                         .HasColumnType("int");
-
-                    b.Property<string>("media_aitags")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("media_created")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("media_deleted")
+                    b.Property<DateTime?>("media_deleted")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("media_description")
@@ -57,17 +48,8 @@ namespace MediaoManage.Migrations
                     b.Property<string>("media_file_type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("media_modified")
+                    b.Property<DateTime?>("media_modified")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("media_originaltags")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("media_searchtext")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("media_small_url")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("media_status")
                         .HasColumnType("int");

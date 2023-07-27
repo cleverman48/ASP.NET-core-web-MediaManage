@@ -47,21 +47,16 @@
         <div class="col-sm-6">
             @Html.DisplayFor(model => model.UserMedia.media_url)
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserMedia.media_small_url)
-        </div>
-        <div class="col-sm-6">
-            @Html.DisplayFor(model => model.UserMedia.media_small_url)
-        </div>
-    </div>
+    </div>   
     <div class="row">
         <div class="col-sm-2">
             @Html.DisplayNameFor(model => model.UserMedia.media_thumbnail_url)
         </div>
-        <div class="col-sm-6">
-            @Html.DisplayFor(model => model.UserMedia.media_thumbnail_url)
+        <div class="col-sm-6 d-flex justify-content-center">
+            @{
+                Uri uri = Model.blobContainer.GetBlobClient(Model.UserMedia.media_thumbnail_url).Uri;
+            }
+            <img src="@uri" alt="images" width="100" height="100" />
         </div>
     </div>
     <div class="row">
@@ -99,51 +94,14 @@
             @Html.DisplayFor(model => model.UserMedia.media_tags)
         </div>
         
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserMedia.Tags)
-        </div>
-        <div class="col-sm-6">
-            @Html.DisplayFor(model => model.UserMedia.Tags)
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserMedia.ProjectTags)
-        </div>
-        <div class="col-sm-6">
-            @Html.DisplayFor(model => model.UserMedia.ProjectTags)
-        </div>
-       
-    </div>
+    </div>  
     <div class="row">
         <div class="col-sm-2">
             @Html.DisplayNameFor(model => model.UserMedia.media_created)
         </div>
         <div class="col-sm-6">
             @Html.DisplayFor(model => model.UserMedia.media_created)
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserMedia.media_originaltags)
-        </div>
-        <div class="col-sm-6">
-            @Html.DisplayFor(model => model.UserMedia.media_originaltags)
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserMedia.media_aitags)
-        </div>
-        <div class="col-sm-6">
-            @Html.DisplayFor(model => model.UserMedia.media_aitags)
-        </div>
-        
+        </div>   
     </div>
     <div class="row">
         <div class="col-sm-2">
@@ -153,16 +111,7 @@
             @Html.DisplayFor(model => model.UserMedia.media_status)
         </div>
        
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserMedia.media_searchtext)
-        </div>
-        <div class="col-sm-6">
-            @Html.DisplayFor(model => model.UserMedia.media_searchtext)
-        </div>
-        
-    </div>
+    </div>    
     <div class="row">
         <div class="col-sm-2">
             @Html.DisplayNameFor(model => model.UserMedia.media_modified)

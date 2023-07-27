@@ -1,11 +1,10 @@
+D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.dll
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\appsettings.Development.json
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\appsettings.json
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.staticwebassets.runtime.json
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.exe
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.deps.json
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.runtimeconfig.json
-D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.dll
-D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.pdb
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\Azure.Core.dll
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\Azure.Identity.dll
 D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\Azure.Storage.Blobs.dll
@@ -275,4 +274,5 @@ D:\project\ASP\MediaoManage\MediaoManage\obj\Debug\net7.0\MediaoManage.dll
 D:\project\ASP\MediaoManage\MediaoManage\obj\Debug\net7.0\refint\MediaoManage.dll
 D:\project\ASP\MediaoManage\MediaoManage\obj\Debug\net7.0\MediaoManage.pdb
 D:\project\ASP\MediaoManage\MediaoManage\obj\Debug\net7.0\MediaoManage.genruntimeconfig.cache
+D:\project\ASP\MediaoManage\MediaoManage\bin\Debug\net7.0\MediaoManage.pdb
 D:\project\ASP\MediaoManage\MediaoManage\obj\Debug\net7.0\ref\MediaoManage.dll

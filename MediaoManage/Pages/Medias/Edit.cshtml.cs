@@ -8,21 +8,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MediaoManage.Data;
 using MediaoManage.Models;
+using Azure.Storage.Blobs;
 
 namespace MediaoManage.Pages.Medias
 {
     public class EditModel : PageModel
     {
         private readonly MediaoManage.Data.MediaoManageContext _context;
-
         public EditModel(MediaoManage.Data.MediaoManageContext context)
         {
             _context = context;
+
         }
 
         [BindProperty]
         public UserMedia UserMedia { get; set; } = default!;
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.UserMedia == null)

@@ -10,16 +10,12 @@
     <hr />
     <div class="row d-flex justify-content-center">
         <div class="col-md-4">
-            <form method="post"  enctype="multipart/form-data" class=" bg-secondary p-2">
-                <div class="form-group">
-                    <input asp-for="file" name="file" class="form-control" />
-                </div>
-                <div class="form-group m-2">
-                    <input type="submit" class="btn btn-primary" value="アップロード" />
-                </div>
-            </form>
-            <form method="post" class="m-2" >
+            <form method="post" class="m-2" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label id="media" class="control-label">動画アップロード</label>
+                    <input asp-for="file" name="file" class="form-control" onchange="uploadMedia()" id="uploadfile_id" />
+                </div>              
                 <div class="form-group">
                     <label asp-for="UserMedia.user_id" class="control-label"></label>
                     <input asp-for="UserMedia.user_id" class="form-control" />
@@ -32,27 +28,23 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="UserMedia.media_file_name" class="control-label"></label>
-                    <input asp-for="UserMedia.media_file_name" class="form-control"  />
+                    <input asp-for="UserMedia.media_file_name" class="form-control" id="filename_id" />
                     <span asp-validation-for="UserMedia.media_file_name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="UserMedia.media_file_type" class="control-label"></label>
-                    <input asp-for="UserMedia.media_file_type" class="form-control"  />
+                    <input asp-for="UserMedia.media_file_type" class="form-control" id="filetype_id" />
                     <span asp-validation-for="UserMedia.media_file_type" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="UserMedia.media_url" class="control-label"></label>
-                    <input asp-for="UserMedia.media_url" class="form-control"  />
+                    <input asp-for="UserMedia.media_url" class="form-control" id="mediaurl_id" />
                     <span asp-validation-for="UserMedia.media_url" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="UserMedia.media_small_url" class="control-label"></label>
-                    <input asp-for="UserMedia.media_small_url" class="form-control" />
-                    <span asp-validation-for="UserMedia.media_small_url" class="text-danger"></span>
-                </div>
-                <div class="form-group">
                     <label asp-for="UserMedia.media_thumbnail_url" class="control-label"></label>
-                    <input asp-for="UserMedia.media_thumbnail_url" class="form-control" />
+                    <input asp-for="thumb_nail" name="thumb_nail" class="form-control" onchange="uploadThumbnail()" id="uploadthumbnail_id" />
+                    <input asp-for="UserMedia.media_thumbnail_url" class="form-control" id="thumbnailurl_id" hidden />
                     <span asp-validation-for="UserMedia.media_thumbnail_url" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -72,44 +64,23 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="UserMedia.media_tags" class="control-label"></label>
-                    <input asp-for="UserMedia.media_tags" class="form-control" />
+                    <div class="w-100">
+                        <input type="text" id="tag-input-field" placeholder="Enter tags" class="w-100">
+                        <div class="m-2" id="tag-list" class="w-100"></div>
+                    </div>
+                    <input asp-for="UserMedia.media_tags" class="form-control" id="mediatags_id" hidden/>
                     <span asp-validation-for="UserMedia.media_tags" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserMedia.Tags" class="control-label"></label>
-                    <input asp-for="UserMedia.Tags" class="form-control" />
-                    <span asp-validation-for="UserMedia.Tags" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserMedia.ProjectTags" class="control-label"></label>
-                    <input asp-for="UserMedia.ProjectTags" class="form-control" />
-                    <span asp-validation-for="UserMedia.ProjectTags" class="text-danger"></span>
-                </div>
+                </div>                        
                 <div class="form-group">
                     <label asp-for="UserMedia.media_created" class="control-label"></label>
                     <input asp-for="UserMedia.media_created" class="form-control" />
                     <span asp-validation-for="UserMedia.media_created" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserMedia.media_originaltags" class="control-label"></label>
-                    <input asp-for="UserMedia.media_originaltags" class="form-control" />
-                    <span asp-validation-for="UserMedia.media_originaltags" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserMedia.media_aitags" class="control-label"></label>
-                    <input asp-for="UserMedia.media_aitags" class="form-control" />
-                    <span asp-validation-for="UserMedia.media_aitags" class="text-danger"></span>
-                </div>
+                </div>                                
                 <div class="form-group">
                     <label asp-for="UserMedia.media_status" class="control-label"></label>
                     <input asp-for="UserMedia.media_status" class="form-control" />
                     <span asp-validation-for="UserMedia.media_status" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserMedia.media_searchtext" class="control-label"></label>
-                    <input asp-for="UserMedia.media_searchtext" class="form-control" />
-                    <span asp-validation-for="UserMedia.media_searchtext" class="text-danger"></span>
-                </div>
+                </div>               
                 <div class="form-group">
                     <label asp-for="UserMedia.media_modified" class="control-label"></label>
                     <input asp-for="UserMedia.media_modified" class="form-control" />
@@ -131,7 +102,55 @@
         <a asp-page="Index">リスト一覧へ</a>
     </div>
 </div>
+<script>
+    const tagInputField = document.getElementById('tag-input-field');
+    const tagList = document.getElementById('tag-list');
+    const mediatag = document.getElementById("mediatags_id");
 
+    tagInputField.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && tagInputField.value.trim() !== '') {
+            const tag = document.createElement('span');
+            tag.classList.add('tag');
+            tag.textContent = tagInputField.value.trim();
+            tagList.appendChild(tag);
+            tagInputField.value = '';
+            resetTags();
+            tagInputField.focus();
+        }
+    });
+
+    tagList.addEventListener('click', function (event) {
+        if (event.target.classList.contains('tag')) {
+            event.target.remove();
+            resetTags();
+        }
+    });
+    function resetTags()
+    {
+        if (tagList.children.length>0)
+        {
+            mediatag.value = tagList.children[0].textContent;
+            for (var i = 1; i < tagList.children.length; i++) {
+                mediatag.value += "," + tagList.children[i].textContent;
+            }
+        }
+        else
+        {
+            mediatag.value = "";
+        }
+    }
+</script>
+
+<style>
+    .tag {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #eaeaea;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+</style>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

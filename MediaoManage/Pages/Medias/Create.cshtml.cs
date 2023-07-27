@@ -20,8 +20,8 @@ namespace MediaoManage.Pages.Medias
     {
         private readonly MediaoManage.Data.MediaoManageContext _context;
         public  string blobContainerName = "movie";
-        //public  string StorageConnectionString = "UseDevelopmentStorage=true";
-        const string StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=youtubedev;AccountKey=YVHIVv+u2BzVxYPagFotweQNV+9uotA41Oswq+DHX24ALGgPd7ugq2bVu30tRJkLvN3hCvV7PQM3+AStHVNC/Q==;EndpointSuffix=core.windows.net";
+        public  string StorageConnectionString = "UseDevelopmentStorage=true";
+        //const string StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=youtubedev;AccountKey=YVHIVv+u2BzVxYPagFotweQNV+9uotA41Oswq+DHX24ALGgPd7ugq2bVu30tRJkLvN3hCvV7PQM3+AStHVNC/Q==;EndpointSuffix=core.windows.net";
         public  BlobContainerClient blobContainer { get; set; }
         public CreateModel(MediaoManage.Data.MediaoManageContext context)
         {
@@ -31,7 +31,7 @@ namespace MediaoManage.Pages.Medias
         }
 
         public IActionResult OnGet()
-        {            
+        {    
             return Page();
         }
 
@@ -41,38 +41,30 @@ namespace MediaoManage.Pages.Medias
         [BindProperty]
 
         public IFormFile file { get; set; }
+        [BindProperty]
+
+        public IFormFile thumb_nail { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
-        {
-            if (file != null)
-            {      
-                string media_url = GetRandomBlobName(file.FileName);
-                BlobClient blobClient =blobContainer.GetBlobClient(media_url);
-                using (var stream = file.OpenReadStream())
-                {
-                    await blobClient.UploadAsync(stream);
-                }
-                UserMedia.media_file_name = Path.GetFileNameWithoutExtension(file.FileName);
-                UserMedia.media_file_type = Path.GetExtension(file.FileName);
-                UserMedia.media_url = media_url;
-                _context.UserMedia.Add(UserMedia);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
-            if (!ModelState.IsValid || _context.UserMedia == null || UserMedia == null)
+        {          
+            if (!ModelState.IsValid || _context.UserMedia == null || UserMedia == null||file==null||thumb_nail==null)
             {
                 return Page();
             }
+            BlobClient blobClient = blobContainer.GetBlobClient(UserMedia.media_url);
+            using (var stream = file.OpenReadStream())
+            {
+                await blobClient.UploadAsync(stream);
+            }
+            BlobClient blobClient1 = blobContainer.GetBlobClient(UserMedia.media_thumbnail_url);
+            using (var stream = thumb_nail.OpenReadStream())
+            {
+                await blobClient1.UploadAsync(stream);
+            }
             _context.UserMedia.Add(UserMedia);
-            await _context.SaveChangesAsync();
-
+            await _context.SaveChangesAsync();  
             return RedirectToPage("./Index");
-        }
-        private string GetRandomBlobName(string filename)
-        {
-            string ext = Path.GetExtension(filename);
-            return string.Format("{0:10}_{1}{2}", DateTime.Now.Ticks, Guid.NewGuid(), ext);
         }
     }
 }
